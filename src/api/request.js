@@ -6,7 +6,7 @@ import router from '@/router'
 const baseURL = 'http://big-event-vue-api-t.itheima.net'
 const instance = axios.create({
   baseURL,
-  timeout: 5000
+  timeout: 10000
 })
 
 instance.interceptors.request.use(
@@ -34,7 +34,7 @@ instance.interceptors.response.use(
     }
     // // 对响应数据做点什么,
     // //失败给错误提示
-    ElMessage.error(response.data.msg || '服务异常')
+    ElMessage.error(response.data.message || '服务异常')
     return Promise.reject(response.data)
   },
   (error) => {
@@ -43,7 +43,6 @@ instance.interceptors.response.use(
     if (error.response?.status === 401) {
       router.push('/login')
     }
-
     // 对响应错误做点什么
     ElMessage.error(error || '服务异常')
     return Promise.reject(error)
