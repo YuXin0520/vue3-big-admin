@@ -31,6 +31,7 @@ const search = () => {
 }
 //点击重置
 const reset = () => {
+  if (!params.value.cate_id && !params.value.state) return
   params.value = {
     pagenum: 1,
     pagesize: 10,

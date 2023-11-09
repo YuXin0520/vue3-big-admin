@@ -1,7 +1,7 @@
 <script setup>
 import { ref, defineExpose, reactive, defineEmits } from 'vue'
 import { QuillEditor } from '@vueup/vue-quill'
-import { downloadFile } from '@/utils/UrlToFile.js'
+import urlToBlob from '@/utils/UrlToFile.js'
 import { baseURL } from '@/api/request.js'
 import {
   artPublishService,
@@ -104,8 +104,9 @@ const openDrawer = async (row) => {
       data: { data }
     } = await artGetInfoService(row.id)
     imageUrl.value = baseURL + data.cover_img
-    const file = downloadFile(data.cover_img, form.value.cover_img)
-    console.log(file)
+    //将网络图片地址转为file对象
+    const file = await urlToBlob(imageUrl.value)
+    data.cover_img = file
     form.value = data
   } else {
     //添加
