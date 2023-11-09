@@ -45,7 +45,7 @@ const reset = async () => {
 }
 </script>
 <template>
-  <page-container title="基本信息">
+  <page-container title="重置密码">
     <el-form
       style="width: 60%"
       :model="form"
